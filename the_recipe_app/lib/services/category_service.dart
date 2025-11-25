@@ -3,7 +3,7 @@ import 'package:the_recipe_app/models/category_model.dart';
 import 'package:http/http.dart' as http;
 
 class CategoryService {
-  static const String baseUrl = 'www.themealdb.com/api/json/v1/1';
+  static const String baseUrl = 'https://www.themealdb.com/api/json/v1/1';
 
   // fetch categories
   Future<List<Category>> getCategories() async {
