@@ -26,7 +26,18 @@ class _MealsListPageState extends State<MealsListPage> {
     final category = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Meals: $category")),
+      backgroundColor: Colors.purple[100],
+      appBar: AppBar(title: Text(
+          "Meals: $category",
+          style: TextStyle(
+            fontSize: 24,
+            //fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            color: Colors.white,
+          ),
+        ),
+          backgroundColor: Colors.purple[900]
+      ),
       body: FutureBuilder<List<Meal>>(
         future: mealsFuture,
         builder: (context, snapshot) {

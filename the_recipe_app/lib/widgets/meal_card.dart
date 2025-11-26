@@ -17,6 +17,7 @@ class MealCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        color: Colors.white,
         margin: const EdgeInsets.only(bottom: 10),
         elevation: 4,
         child: Row(
@@ -37,9 +38,11 @@ class MealCard extends StatelessWidget {
             Expanded(
               child: Text(
                 name,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.purple[900],
+                  fontStyle: FontStyle.italic,
                 ),
               ),
             ),

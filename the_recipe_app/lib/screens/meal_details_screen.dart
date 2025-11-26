@@ -24,7 +24,18 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Meal Details")),
+      backgroundColor: Colors.white,
+      appBar: AppBar(title: const Text(
+          "Meal Details",
+          style: TextStyle(
+            fontSize: 24,
+            //fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            color: Colors.white,
+          ),
+        ),
+          backgroundColor: Colors.purple[900],
+      ),
       body: FutureBuilder<MealDetail>(
         future: _mealFuture,
         builder: (context, snapshot) {

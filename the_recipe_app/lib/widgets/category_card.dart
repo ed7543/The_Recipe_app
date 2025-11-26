@@ -17,6 +17,7 @@ class CategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        color: Colors.white,
         margin: const EdgeInsets.only(bottom: 8),
         elevation: 6,
         shape: RoundedRectangleBorder(
@@ -31,19 +32,22 @@ class CategoryCard extends StatelessWidget {
               ),
               child: Image.network(
                 thumbnail,
-                height: 90,
-                width: 110,
-                fit: BoxFit.cover,
+                height: 80,
+                width: 100,
+                //fit: BoxFit.cover,
               ),
             ),
             const SizedBox(width: 14),
             Expanded(
               child: Text(
                 name,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  color: Colors.purple[900],
                 ),
+                //textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(width: 10),
