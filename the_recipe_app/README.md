@@ -1,5 +1,7 @@
 # the_recipe_app
 
+# FUNCTIONALITY VIDEO https://youtube.com/shorts/sDeqR48U2UE?feature=share
+
 A new Flutter project using the mealdb api.
 
 ## Getting Started
