@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:the_recipe_app/services/category_service.dart';
 import 'package:the_recipe_app/services/meal_service.dart';
 import '../models/category_model.dart';
+import '../services/notification_service.dart';
 import '../widgets/category_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +21,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     categoriesFuture = categoryService.getCategories();
+
+    // Initialize notifications
+    NotificationsService().init(context);
+    NotificationsService().subscribeToDailyRecipe();
   }
 
   // Function to fetch a random meal and navigate

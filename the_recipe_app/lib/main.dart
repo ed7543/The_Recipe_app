@@ -7,7 +7,6 @@ import 'package:the_recipe_app/screens/home_list_category_screen.dart';
 import 'package:the_recipe_app/screens/meal_details_screen.dart';
 import 'package:the_recipe_app/screens/meals_list_screen.dart';
 import 'package:the_recipe_app/services/favorite_service.dart';
-import 'package:the_recipe_app/services/notifications_service.dart';
 
 
 import 'firebase_options.dart';
