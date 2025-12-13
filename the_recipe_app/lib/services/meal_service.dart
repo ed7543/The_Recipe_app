@@ -45,4 +45,35 @@ class MealService {
       throw Exception('Failed loading: Random meal.');
     }
   }
+
+  // fetch multiple meals by list of IDs
+  Future<List<MealDetail>> getMealsByIds(List<String> ids) async {
+    List<MealDetail> meals = [];
+    for (var id in ids) {
+      try {
+        final meal = await getMealsById(id);
+        meals.add(meal);
+      } catch (e) {
+        // optional: skip failed meals
+        print("Failed to load meal $id: $e");
+      }
+    }
+    return meals;
+  }
+
+  // Fetch multiple random meals (say 20)
+  Future<List<MealDetail>> getAllMeals({int count = 20}) async {
+    List<MealDetail> meals = [];
+    for (int i = 0; i < count; i++) {
+      try {
+        final meal = await getRandomMeal();
+        meals.add(meal);
+      } catch (e) {
+        print("Failed to load random meal: $e");
+      }
+    }
+    return meals;
+  }
 }
+
+//}

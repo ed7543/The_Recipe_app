@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/favorite_service.dart';
 
 class MealCard extends StatelessWidget {
   final String name;
   final String thumbnail;
+  final String mealId;
   final VoidCallback onTap;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
   const MealCard({
     super.key,
     required this.name,
     required this.thumbnail,
+    required this.mealId,
     required this.onTap,
+    required this.isFavorite,
+    required this.onFavoriteToggle,
   });
 
   @override
@@ -46,6 +54,20 @@ class MealCard extends StatelessWidget {
                 ),
               ),
             ),
+            // Heart button
+            Consumer<FavoritesService>(
+              builder: (context, favorites, _) {
+                final isFavorite = favorites.isFavorite(mealId);
+                return IconButton(
+                  icon: Icon(
+                    isFavorite ? Icons.favorite : Icons.favorite_border,
+                    color: isFavorite ? Colors.deepPurpleAccent : Colors.purple[900],
+                  ),
+                  onPressed: onFavoriteToggle,
+                );
+              },
+            ),
+            const SizedBox(width: 8),
           ],
         ),
       ),

@@ -38,6 +38,11 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  // Function to fetch favorites (meals) list
+  void _goToFavorites() {
+    Navigator.pushNamed(context, '/favorites');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,28 +77,50 @@ class _HomePageState extends State<HomePage> {
 
           return Column(
             children: [
-              // random meal kopce
+              // random meal and favorites kopcinja
               Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: _goToRandomMeal,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple[900],
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: const Text(
-                      'Random Meal',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: _goToRandomMeal,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple[900],
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        child: const Text(
+                          'Random Meal',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: _goToFavorites,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple[900],
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                        ),
+                        child: const Text(
+                          'Favorites',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+
               // cards za categories
               Expanded(
                 child: ListView.builder(

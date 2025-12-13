@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/meal_details_model.dart';
 import '../services/meal_details_service.dart';
 import '../widgets/meal_detail.dart';
+import '../services/favorite_service.dart';
 
 class MealDetailsPage extends StatefulWidget {
   final String mealId;
@@ -25,16 +27,32 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text(
+      appBar: AppBar(
+        title: const Text(
           "Meal Details",
           style: TextStyle(
             fontSize: 24,
-            //fontWeight: FontWeight.bold,
             fontStyle: FontStyle.italic,
             color: Colors.white,
           ),
         ),
-          backgroundColor: Colors.purple[900],
+        backgroundColor: Colors.purple[900],
+        actions: [
+          Consumer<FavoritesService>(
+            builder: (context, favorites, _) {
+              final isFavorite = favorites.isFavorite(widget.mealId);
+              return IconButton(
+                icon: Icon(
+                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  color: isFavorite ? Colors.purple[100] : Colors.white,
+                ),
+                onPressed: () {
+                  favorites.toggleFavorite(widget.mealId);
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: FutureBuilder<MealDetail>(
         future: _mealFuture,
@@ -66,19 +84,17 @@ class _MealDetailsPageState extends State<MealDetailsPage> {
                           color: Colors.grey.shade600,
                           fontStyle: FontStyle.italic)),
                 const SizedBox(height: 20),
-                if (meal.tags != null) Text("Tags: ${meal.tags}",
-                    style: const TextStyle(fontSize: 16)),
+                if (meal.tags != null)
+                  Text("Tags: ${meal.tags}", style: const TextStyle(fontSize: 16)),
                 const SizedBox(height: 20),
                 const Text("Ingredients",
-                    style:
-                    TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
-                ...meal.ingredients.map((item) => IngredientItem(
-                    ingredient: item['ingredient']!, measure: item['measure']!)),
+                ...meal.ingredients.map((item) =>
+                    IngredientItem(ingredient: item['ingredient']!, measure: item['measure']!)),
                 const SizedBox(height: 25),
                 const Text("Instructions",
-                    style:
-                    TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
                 Text(meal.instructions,
                     style: const TextStyle(fontSize: 16, height: 1.4)),

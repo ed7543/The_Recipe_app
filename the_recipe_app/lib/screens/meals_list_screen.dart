@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:the_recipe_app/services/meal_service.dart';
 import '../models/meal_model.dart';
+import '../services/favorite_service.dart';
 import '../widgets/meal_card.dart';
 
 class MealsListPage extends StatefulWidget {
@@ -13,6 +15,18 @@ class MealsListPage extends StatefulWidget {
 class _MealsListPageState extends State<MealsListPage> {
   final MealService mealService = MealService();
   late Future<List<Meal>> mealsFuture;
+
+  // Set<String> favoriteMeals = {};
+  //
+  // void toggleFavorite(String mealId) {
+  //   setState(() {
+  //     if (favoriteMeals.contains(mealId)) {
+  //       favoriteMeals.remove(mealId);
+  //     } else {
+  //       favoriteMeals.add(mealId);
+  //     }
+  //   });
+  // }
 
   @override
   void didChangeDependencies() {
@@ -60,12 +74,17 @@ class _MealsListPageState extends State<MealsListPage> {
               return MealCard(
                 name: meal.name,
                 thumbnail: meal.thumbnail,
+                mealId: meal.id,
                 onTap: () {
                   Navigator.pushNamed(
                     context,
                     '/meal-details',
                     arguments: meal.id,
                   );
+                },
+                isFavorite: Provider.of<FavoritesService>(context).isFavorite(meal.id),
+                onFavoriteToggle: () {
+                  Provider.of<FavoritesService>(context, listen: false).toggleFavorite(meal.id);
                 },
               );
             },
